@@ -1,0 +1,26 @@
+{% block title %}<h2>Информация о сотруднике</h2>{% endblock %}
+
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <h2>{{userInfo.FIO}}</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr><th>Дата</th><th>Рабочее время</th><th>Первый вход</th><th>Последний выход</th><th>Кол\время перекуров</th></tr>
+        </thead>
+        <tbody>
+            {% for days in userInfo.days %}
+            	<tr><td>{{days.date}}</td>
+            		<td>{{days.rabotal}}</td>
+            		<td>{{days.firstaction}}</td>
+            		<td>{{days.lastaction}}</td>
+            		<td>{{days.countsmoke}}/{{days.smoketime}}</td>
+            	</tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}

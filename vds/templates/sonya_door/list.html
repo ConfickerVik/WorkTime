@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Отдел кадров{% endblock %}
+
+{% block content %}
+        
+        <div class="form-group row mb-3 mt-3">
+            <label for="inputPassword6">Рабочих дней в месяце:</label> 
+            <input id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" name="workdayscount" type="text" value="{{ workdayscount }}">
+            <input class="btn btn-primary mt-3" type="submit" value="Сохранить всем">
+            {% csrf_token %}
+        </div>
+        
+        <div class="form-group row mb-3 mt-3">
+            <input class="btn btn-primary mt-3" type="submit" name="saveworkdaysall" value="Сохранить всем раб.день с прошлого месяца">
+            {% csrf_token %}
+        </div>
+
+        <h2 class="row">Статистика за месяц:</h2>
+
+        <div class="form-group row mb-3 mt-3 ">
+            <input class="btn btn-primary mb-3" type="submit" name="saveall" value="Сохранить все изменения" >
+            {% csrf_token %}
+        </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr><th>Имя</th><th>Отпуск</th><th>Болезнь</th><th>Поездка</th><th>Рабочий День</th><th>Рабочих дней в месяце</th><th>Доп.время</th><th>Начало рабочего времени</th><th>Конец рабочего времени</th><th>Отработано</th><th>Необходимо</th><th>Недоработка</th></tr>
+        </thead>
+        <tbody>
+            {% for key, value in stat.items %}
+                <tr><td><a href="{% url 'sonya_door:detail' value.id %}">{{ value.FIO }}</a></td>
+                    <td><input type="text" class="form-control" name="otpusk" value="{{value.info.otpusk}}"></td>
+                    <td><input type="text" class="form-control" name="bolezn" value="{{value.info.bolezn}}"></td>
+                    <td><input type="text" class="form-control" name="poezdka" value="{{value.info.poezdka}}"></td>
+                    <td><input type="text" class="form-control" name="deni" value="{{value.info.deni}}"></td>
+                    <td><input type="text" class="form-control" name="workdays" value="{{value.info.workdays}}"></td>
+                    <td><input type="text" class="form-control" name="other" value="{{value.info.other}}"></td>
+                    <td><input type="text" class="form-control" name="work_time_start" value="{{value.info.work_time_start}}"></td>
+                    <td><input type="text" class="form-control" name="work_time_end" value="{{value.info.work_time_end}}"></td>
+                    <td>{{value.otrabotano}}</td> 
+                    <td>{{value.neobxodimo}}</td>
+                    <td>{{value.nedorabotka}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+{% endblock %}

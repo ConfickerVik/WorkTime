@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Список сотрудников{% endblock %}
+
+{% block content %}
+    <h2 class="row">Статистика за месяц:</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr><th>ФИО</th><th>Отработано</th><th>Необходимо</th><th>Недоработка</th></tr>
+        </thead>
+        <tbody>
+            {% for key, value in stat.items %}
+        	<tr><td bgcolor="{{value.color}}"><a href="{% url 'door:detail' value.id %}">{{ value.FIO }}</a></td>
+        		<td>{{value.otrabotano}}</td>
+        		<td>{{value.neobxodimo}}</td>
+        		<td>{{value.nedorabotka}}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
